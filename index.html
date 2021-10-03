@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Gradient Editor</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.css">
+
+    <!--<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>-->
+    <link href="https://fonts.googleapis.com/css2?family=Monda&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="icon" type="image/png" href="./favicon.png" sizes="16x16">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZG0DBFN54V"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-ZG0DBFN54V');
+    </script>
+</head>
+
+<body>
+    <div id="test"></div>
+    <div class="main">
+        <h1><a href="./">CSS Gradient Editor</a></h1>
+        <nav class="menu-bar">
+            <div style="display: block;"><a id="gallery" href="collection.html">Gradients Gallery</a>
+                <button id="mini-show">show</button>
+                <button id="gradient">gradient</button>
+                <button id="do">do</button>
+            </div>
+            <div class="l-pull-right">
+                <a id="report-bug-btn" class="btn-type-3" title="feedback" href="./contact" target="_blank">
+                    Report Bug/Request Feature</a>
+                <button id="get-css-btn" class="btn-type-2"><span class="get-css"></span>Get CSS</button>
+            </div>
+        </nav>
+        <section class="col">
+            <div class="panel">
+                <div class="panel__heading" style="overflow: hidden;">
+                    <h2>Presets</h2>
+                    <div class="panel__toggle toggle-on" style="margin-left: 10px;"></div>
+                    <div class="l-pull-right">
+                        <a id="import-css-btn" class="btn-type-3"><span class="input"></span>Import</a>
+                        <div class="current" style="background-image: repeating-radial-gradient(ellipse farthest-corner at left top, rgba(0,165,223,1) 0%, rgba(62,20,123,1) 20%, rgba(226,0,121,1) 40%, rgba(223,19,44,1) 60%, rgba(243,239,21,1) 80%, rgba(0,152,71,1) 100%);
+						background-size: auto;
+						background-position: 0% 0%;
+						background-repeat: repeat;
+						background-color: rgba(0,0,0,0);"></div>
+                        <button id="delete-preset-btn" class="btn-type-2"><span class="trash"></span>Delete</button>
+                        <button id="save-preset-btn" class="btn-type-2"><span class="save"></span>Save</button>
+                    </div>
+                </div>
+                <div class="panel__body">
+                    <ul class="presets-list">
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="col">
+            <div class="panel">
+                <div class="panel__heading">
+                    <h2>Preview</h2>
+                    <div class="panel__toggle toggle-on"></div>
+                    <span id="preview-size"></span>
+                </div>
+                <div class="panel__body" style="overflow: hidden;">
+                    <div id="gradient-preview" class="gradient-background" style="float: left;">
+                        <div class="gradient-real"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="col" style="clear: left;">
+            <div class="panel">
+                <div class="panel__heading">
+                    <h2>Stops</h2>
+                    <div class="panel__toggle toggle-on"></div>
+                </div>
+                <div class="panel__body">
+                    <div class="l-gradient-row">
+                        <div class="gradient-container">
+                            <div id="gradient-editor" class="gradient-background">
+                                <div class="gradient-real"></div>
+                            </div>
+                            <div class='stop-markers' title='Click to add a color stop'></div>
+                        </div>
+                        <div class="reverse-btn" title="reverse stops"></div>
+                    </div>
+                    <div class="l-col-w254">
+                        <div class="l-setting-block">
+                            <div class="l-spinner-row color-row">
+                                <label for="color">Color</label>
+                                <div class="text-1">
+                                    <input id="color-value-button" class="color-label" type="text" />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="color-delete-button" class="btn-type-1" href="javascript:;">Delete Selected Stop</div>
+                    </div>
+                    <div class="l-col-w254">
+                        <div class="l-setting-block">
+                            <div class="l-spinner-row">
+                                <label for="color-location"><span>Location</span><span
+                                        style="margin-left: 45px;">%</span></label>
+                                <div class="text-1">
+                                    <input id="color-location" type="text" value="100" />
+                                </div>
+                            </div>
+                            <div id="color-location-slider-bar" class="slider-bar"></div>
+                        </div>
+                        <div id="reset-button" class="btn-type-1" href="javascript:;">Reset</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="col" style="clear: right;">
+            <div class="panel">
+                <div class="panel__heading">
+                    <h2>Gradients</h2>
+                    <div class="panel__toggle toggle-on"></div>
+                </div>
+                <div class="panel__body" style="padding: 15px 0 15px 0;">
+                    <div class="grads__heading"><span>width</span><span>height</span><span>x</span><span>y</span><span style="width: 34px;">repeat</span></div>
+                    <ul class="grads__container">
+                    </ul>
+                    <div>
+                        <a id="add-gradient-btn" class="btn-type-3"><span class="add"></span>Add Gradient</a>
+                        <a id="adjust-color-btn" class="btn-type-3" style="float: right;"><span
+                                class="color-wheel"></span>Adjust Color</a>
+                    </div>
+                    <div class="add-gradient">
+                        <div class="l-row-p15">
+                            <!--<label>Repeating:</label>-->
+                        </div>
+                        <div class="l-gradient-row">
+                            <div class="gradient-container">
+                                <div id="gradient-editor-mini" class="gradient-background">
+                                    <div class="gradient-real-mini"></div>
+                                </div>
+                                <div class='add-gradient__stop-markers' title='Click to add a color stop'></div>
+                            </div>
+                            <div class="gradient-background" id="mini-preview-holder">
+                                <div class="add-gradient__preview"></div>
+                            </div>
+                        </div>
+                        <div class="add-gradient__tool-bar l-row-p15" style="overflow: hidden;">
+                            <label for="mini-type-selectmenu" style="float: left; margin-right: 10px;">Type:</label>
+                            <select id="mini-type-selectmenu">
+                                <option>linear</option>
+                                <option>radial</option>
+                                <option>conic</option>
+                            </select>
+                            <label style="float: left; margin-right: 10px; margin-left: 10px;">Color Stop:</label>
+                            <div class="text-4">
+                                <input class="de" id="add-gradient__color-location" />
+                                <!--<input id="add-gradient__color-value-button" />-->
+                                <!-- <button id="add-gradient__delete"><span></span></button> -->
+                                <button id="add-gradient__delete"><span></span></button>
+                            </div>
+                        </div>
+                        <textarea class="add-gradient__input" placeholder="type gradient"></textarea>
+                        <div>
+                            <button id="add-gradient-accept">accept</button>
+                            <button id="add-gradient-cancel">cancel</button>
+                        </div>
+                    </div>
+                    <div class="adjust-color">
+                        <div class="adjust-color__center">
+                            <div class="adjust-color__settings">
+                                <div class="l-col-w254" style="float: left;">
+                                    <div class="l-setting-block">
+                                        <div class="l-spinner-row">
+                                            <label for="hue">Hue</label>
+                                            <div class="text-1">
+                                                <input id="hue" type="text" value="0" />
+                                            </div>
+                                        </div>
+                                        <div class="slider-bar hsl-slider" id="hue-bar"></div>
+                                    </div>
+                                    <div class="l-setting-block">
+                                        <div class="l-spinner-row">
+                                            <label for="lightness">Lightness</label>
+                                            <div class="text-1">
+                                                <input id="lightness" type="text" value="0" />
+                                            </div>
+                                        </div>
+                                        <div class="slider-bar hsl-slider" id="lightness-bar"></div>
+                                    </div>
+                                </div>
+                                <div class="l-col-w254">
+                                    <div class="l-setting-block">
+                                        <div class="l-spinner-row">
+                                            <label for="saturation">Saturation</label>
+                                            <div class="text-1">
+                                                <input id="saturation" type="text" value="0" />
+                                            </div>
+                                        </div>
+                                        <div class="slider-bar hsl-slider" id="saturation-bar"></div>
+                                    </div>
+                                    <div class="l-setting-block">
+                                        <div class="l-spinner-row">
+                                            <label for="opacity">Opacity</label>
+                                            <div class="text-1">
+                                                <input id="opacity" type="text" value="0" />
+                                            </div>
+                                        </div>
+                                        <div class="slider-bar hsl-slider" id="opacity-bar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button id="adjust-color-accept">accept</button>
+                                <button id="adjust-color-cancel" style="float: right;">cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="col" style="clear: left;">
+            <div class="panel">
+                <div class="panel__heading">
+                    <h2>Properties</h2>
+                    <div class="panel__toggle toggle-on"></div>
+                </div>
+                <div class="panel__body">
+                    <div class="l-row-p15">
+                        <label class="setting__property">Background Color:</label>
+                        <!--<div class="text-1">-->
+                        <input id="background-color" type="text" />
+                        <!--</div>-->
+                    </div>
+                    <div class="l-row-p15">
+                        <label class="setting__property">Repeating:</label>
+                        <button class="setting__value" data-type="repeat" data-value=true>repeat</button>
+                        <button class="setting__value" data-type="repeat" data-value=false>no repeat</button>
+                    </div>
+                    <div class="l-row-p15">
+                        <label class="setting__property">Gradient Type:</label>
+                        <button class="setting__value" data-type="type" data-value="linear">linear</button>
+                        <button class="setting__value" data-type="type" data-value="radial">radial</button>
+                        <button class="setting__value" data-type="type" data-value="conic">conic</button>
+                    </div>
+                    <div id="linear-setting-block">
+                        <label class="setting__property">Direction:</label>
+                        <div style="display: inline-block;">
+                            <div class="linear-dir-btn-group">
+                                <div class="l-btn-row">
+                                    <div class="setting__value" data-type="linearOrientation" data-value="to left top">
+                                    </div>
+                                    <div class="setting__value" data-type="linearOrientation" data-value="to top"></div>
+                                    <div class="setting__value" data-type="linearOrientation" data-value="to right top">
+                                    </div>
+                                </div>
+                                <div class="l-btn-row">
+                                    <div class="setting__value" data-type="linearOrientation" data-value="to left">
+                                    </div>
+                                    <div class="setting__value" data-type="linearOrientation" data-value="to right" style="margin-left: 43px;"></div>
+                                </div>
+                                <div class="l-btn-row">
+                                    <div class="setting__value" data-type="linearOrientation" data-value="to left bottom"></div>
+                                    <div class="setting__value" data-type="linearOrientation" data-value="to bottom">
+                                    </div>
+                                    <div class="setting__value" data-type="linearOrientation" data-value="to right bottom"></div>
+                                </div>
+                            </div>
+                            <div class="linear-angle-picker-group">
+                                <div class="anglepicker-container">
+                                    <div id="linear-angle-picker"></div>
+                                </div>
+                                <div class="text-3">
+                                    <input id="linear-angle-value" type="text" value="0" />
+                                </div>
+                                <label class="align-right" for="linear-angle-value" id="linear-label-deg">deg</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="radial-setting-block">
+                        <div id="radial-shape-block" class="l-row-p15">
+                            <label class="setting__property">Shape:</label>
+                            <button class="setting__value" data-type="radialShape" data-value="circle">circle</button>
+                            <button class="setting__value" data-type="radialShape" data-value="ellipse">ellipse</button>
+                        </div>
+                        <div id="radial-size-block" class="l-row-p15">
+                            <label class="setting__property">Size:</label>
+                            <div style="display: inline-block;">
+                                <div class="l-row-p15">
+                                    <button class="setting__value" data-type="radialSize" data-value="closest-side">closest-side</button>
+                                    <button class="setting__value" data-type="radialSize" data-value="closest-corner">closest-corner</button>
+                                    <button class="setting__value" data-type="radialSize" data-value="farthest-side">farthest-side</button>
+                                    <button class="setting__value" data-type="radialSize" data-value="farthest-corner">farthest-corner</button>
+                                </div>
+                                <div class="text-2">
+                                    <input type="text" id="sx" value="0" />
+                                    <select class="setting__value f1" data-type='radialSize' id="radial-horizontal-size-unit">
+                                        <option value="px">px</option>
+                                        <option value="p">%</option>
+                                        <option value="em">em</option>
+                                    </select>
+                                </div>
+                                <div class="text-2">
+                                    <input type="text" id="sy" value="0" />
+                                    <select class="setting__value f1" data-type='radialSize' id="radial-vertical-size-unit">
+                                        <option value="px">px</option>
+                                        <option value="p">%</option>
+                                        <option value="em">em</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="radial-horizontal-position-block" class="l-row-p15">
+                            <label class="setting__property" for="rpx">Horizontal Position:</label>
+                            <div style="display: inline-block;">
+                                <div class="l-row-p15">
+                                    <button class="setting__value" data-type="radialHorizontalPosition" data-value="left">left</button>
+                                    <button class="setting__value" data-type="radialHorizontalPosition" data-value="center">center</button>
+                                    <button class="setting__value" data-type="radialHorizontalPosition" data-value="right">right</button>
+                                </div>
+                                <div class="text-2">
+                                    <input type="text" id="rpx" value="0" />
+                                    <select class="setting__value f1" data-type="radialHorizontalPosition" id="radial-horizontal-position-unit">
+                                        <option value="px">px</option>
+                                        <option value="p">%</option>
+                                        <option value="em">em</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="radial-vertical-position-block" class="l-row-p15">
+                            <label class="setting__property" for="rpy">Vertical Position:</label>
+                            <div style="display: inline-block;">
+                                <div class="l-row-p15">
+                                    <button class="setting__value" data-type="radialVerticalPosition" data-value="top">top</button>
+                                    <button class="setting__value" data-type="radialVerticalPosition" data-value="center">center</button>
+                                    <button class="setting__value" data-type="radialVerticalPosition" data-value="bottom">bottom</button>
+                                </div>
+                                <div class="text-2">
+                                    <input type="text" id="rpy" value="0" />
+                                    <select class="setting__value f1" data-type="radialVerticalPosition" id="radial-vertical-position-unit">
+                                        <option value="px">px</option>
+                                        <option value="p">%</option>
+                                        <option value="em">em</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="conic-setting-block">
+                        <div id="conic-angle-block" class="l-row-p15">
+                            <label class="setting__property">Angle:</label>
+                            <div class="conic-angle-picker-group" style="display: inline-block;">
+                                <div class="anglepicker-container">
+                                    <div id="conic-angle-picker" style="float: left;"></div>
+                                </div>
+                                <div class="text-3">
+                                    <input id="conic-angle-value" type="text" value="0" />
+                                </div>
+                                <label class="align-right" for="conic-angle-value">deg</label>
+                            </div>
+                        </div>
+                        <div id="conic-horizontal-position-block" class="l-row-p15">
+                            <label class="setting__property" for="cx">Horizontal Position:</label>
+                            <div style="display: inline-block;">
+                                <div class="l-row-p15" data-type="conicHorizontalPosition">
+                                    <button class="setting__value" data-type="conicHorizontalPosition" data-value="left">left</button>
+                                    <button class="setting__value" data-type="conicHorizontalPosition" data-value="center">center</button>
+                                    <button class="setting__value" data-type="conicHorizontalPosition" data-value="right">right</button>
+                                </div>
+                                <div class="text-2">
+                                    <input type="text" id="cx" value="0" />
+                                    <select class="setting__value f1" data-type="conicHorizontalPosition" id="conic-horizontal-position-unit">
+                                        <option value="px">px</option>
+                                        <option value="p">%</option>
+                                        <option value="em">em</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="conic-vertical-position-block" class="l-row-p15">
+                            <label class="setting__property" for="cy">Vertical Position:</label>
+                            <div style="display: inline-block;">
+                                <div class="l-row-p15" data-type="conicVerticalPosition">
+                                    <button class="setting__value" data-type="conicVerticalPosition" data-value="top">top</button>
+                                    <button class="setting__value" data-type="conicVerticalPosition" data-value="center">center</button>
+                                    <button class="setting__value" data-type="conicVerticalPosition" data-value="bottom">bottom</button>
+                                </div>
+                                <div class="text-2">
+                                    <input type="text" id="cy" value="0" />
+                                    <select class="setting__value f1" data-type="conicVerticalPosition" id="conic-vertical-position-unit">
+                                        <option value="px">px</option>
+                                        <option value="p">%</option>
+                                        <option value="em">em</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <ul>
+                <li id="copy-right"> &copy; 2020 www.cssgradienteditor.com</li>
+                <li><a href="./about">About</a> </li>
+                <li><a href="./contact">Contact</a></li>
+                <li><a href="./terms">Terms of Use</a></li>
+                <li><a href="./privacy">Privacy Policy</a></li>
+            </ul>
+        </footer>
+    </div>
+    <div id="import-css-dialog" title="IMPORT FROM CSS">
+        <textarea id="import-css-area" placeholder="NOTE: This Gradient Editor Only Supports Percentage Values"></textarea>
+        <button id="import-css-button-ok">
+            Import
+        </button>
+    </div>
+    <div id="get-css-dialog" title="CSS">
+        <div class="show-code">
+            <div id="show-code-background-image"></div>
+            <div id="show-code-background-size"></div>
+            <div id="show-code-background-position"></div>
+            <div id="show-code-background-repeat"></div>
+            <div id="show-code-background-color"></div>
+        </div>
+        <label for="color-format">format:</label>
+        <select id="color-format">
+            <option value="hex">hex</option>
+            <option value="hsla">hsla</option>
+            <option value="rgba">rgba</option>
+        </select>
+        <div class="btn-type-2" id="get-copy-css" data-clipboard-action="copy" data-clipboard-target=".show-code">
+            <span class="copy"></span>Copy to Clipboard
+        </div>
+        <div class="l-pull-right">
+            <div class="btn-share codepen">
+            </div>
+            <div class="btn-share facebook">
+            </div>
+            <div class="btn-share twitter">
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+    <script type="text/javascript" src="./script.js"></script>
+
+</body>
+
+</html>
