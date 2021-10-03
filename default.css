@@ -1,0 +1,56 @@
+ body {
+     margin: 0;
+     font-family: 'Droid Sans', sans-serif;
+     padding-left: 180px;
+     padding-right: 180px;
+ }
+ 
+ h1 {
+     text-align: center;
+     font-size: 36px;
+ }
+ 
+ h1,
+ h2,
+ h3,
+ h4,
+ h5,
+ h6 {
+     font-family: Monda;
+     font-weight: normal;
+ }
+ 
+ .main {
+     max-width: 1380px;
+     margin: auto;
+     overflow: auto;
+     min-height: 100%;
+ }
+ 
+ footer {
+     width: 100%;
+     margin-top: 30px;
+     padding: 40px 0px;
+     border-top: 1px solid #dddddd;
+     display: inline-block;
+ }
+ 
+ footer a {
+     color: #0366d6;
+     text-decoration: none;
+ }
+ 
+ footer ul {
+     font-size: 12px;
+     display: flex;
+     list-style-type: none;
+     justify-content: space-between !important;
+     padding: 0;
+ }
+ 
+ @media (max-width: 800px) {
+     body {
+         padding-left: 20px;
+         padding-right: 20px;
+     }
+ }
