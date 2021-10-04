@@ -33,8 +33,8 @@ $.widget("ui.anglepicker", $.ui.mouse, {
         this.height = this.element.height();
 
         this.startOffset = {
-            x: myOffset.left+(this.width/2),
-            y: myOffset.top+(this.height/2)
+            x: myOffset.left + (this.width / 2),
+            y: myOffset.top + (this.height / 2)
         };
 
         if (!this.element.is("ui-anglepicker-dragging")) {
@@ -85,7 +85,7 @@ $.widget("ui.anglepicker", $.ui.mouse, {
     },
     drawRotation: function() {
         var value = this.options.clockwise ? this.options.value : -this.options.value;
-        var rotation = 'rotate('+-value+'deg)';
+        var rotation = 'rotate(' + -value + 'deg)';
 
         this.pointer.css({
             '-webkit-transform': rotation,
@@ -124,31 +124,29 @@ $.widget("ui.anglepicker", $.ui.mouse, {
         opposite = this.options.clockwise ? opposite : -opposite;
 
         var adjacent = event.pageX - this.startOffset.x,
-            radians = Math.atan(opposite/adjacent),
-            degrees = Math.round(radians * (180/Math.PI), 10);
+            radians = Math.atan(opposite / adjacent),
+            degrees = Math.round(radians * (180 / Math.PI), 10);
 
         if (event.shiftKey) {
             degrees = this.roundToMultiple(degrees, this.options.shiftSnap);
-        }
-        else {
+        } else {
             degrees = this.roundToMultiple(degrees, this.options.snap);
         }
 
         if (adjacent < 0 && opposite >= 0) {
             degrees += 180;
-        }
-        else if (opposite < 0 && adjacent < 0) {
+        } else if (opposite < 0 && adjacent < 0) {
             degrees -= 180;
         }
 
         this.setDegrees(degrees);
     },
     roundToMultiple: function(number, multiple) {
-        var value = number/multiple,
+        var value = number / multiple,
             integer = Math.floor(value),
             rest = value - integer;
 
-        return rest > 0.5 ? (integer+1)*multiple : integer*multiple;
+        return rest > 0.5 ? (integer + 1) * multiple : integer * multiple;
     },
     options: {
         distance: 1,
@@ -160,6 +158,7 @@ $.widget("ui.anglepicker", $.ui.mouse, {
         clockwise: true // anti-clockwise if false
     }
 });
+
 function UserColor(options) {
     //console.log(options);
     if (options && options['format'] && options['color']) {
@@ -234,9 +233,9 @@ UserColor.prototype.changeFormatColor = function(newFormat) {
     if (this.format == 'rgb' || this.format == 'rgba') {
         if (newFormat == 'hsl' || newFormat == 'hsla') {
             newColor = rgb2hsl(this.color);
-            if (newFormat == 'hsla' && this.format == 'rgb') {
-                //newColor['a'] = 1;//
-            }
+            //if (newFormat == 'hsla' && this.format == 'rgb') {
+            //newColor['a'] = 1;//
+            //}
         } else if (newFormat == 'hex') {
             newColor = rgb2hex(this.color);
         } else if (newFormat == 'rgb') {
@@ -251,9 +250,9 @@ UserColor.prototype.changeFormatColor = function(newFormat) {
     if (this.format == 'hsl' || this.format == 'hsla') {
         if (newFormat == 'rgb' || newFormat == 'rgba') {
             newColor = hsl2rgb(this.color);
-            if (newFormat == 'rgba' && this.format == 'hsl') {
-                //newColor['a'] = 1;//
-            }
+            //if (newFormat == 'rgba' && this.format == 'hsl') {
+            //newColor['a'] = 1;//
+            //}
         } else if (newFormat == 'hex') {
             newColor = hsl2hex(this.color);
         } else if (newFormat == 'hsl') {
@@ -297,8 +296,8 @@ UserColor.prototype.displayColor = function(format) {
 
     if (color.format == 'hsl' || color.format == 'hsla') {
         res += color.color['h'] + ',';
-        res += parseFloat(color.color['s']) + '%,';//ngar low bae
-        res += parseFloat(color.color['l']) + '%';//ngar low bae
+        res += parseFloat(color.color['s']) + '%,'; //ngar low bae
+        res += parseFloat(color.color['l']) + '%'; //ngar low bae
         //res += color.color['s'] + '%,';//ngar low bae
         //res += color.color['l'] + '%';//ngar low bae
     } else if (color.format == 'rgb' || color.format == 'rgba') {
@@ -317,7 +316,7 @@ UserColor.prototype.displayColor = function(format) {
         res += ')';
     }
     //console.log(color);
-//console.log(res);
+    //console.log(res);
     return res;
 };
 
@@ -456,9 +455,9 @@ function hex2rgb(hex) {
     b = hex.charAt(4) + hex.charAt(5);
     a = hex.charAt(6) + hex.charAt(7);
 
-    if (!a) {
-        //a = 'ff';
-    }
+    //if (!a) {
+    //a = 'ff';
+    //}
 
     ////console.log(a);
 
@@ -492,12 +491,12 @@ function rgb2hex(rgb) {
     }
     var p = component2Hex(rgb['r']) + component2Hex(rgb['g']) + component2Hex(rgb['b']);
     //if (rgb["a"] !== 1) {
-        ////console.log('!');
-        var m = Math.round(parseFloat(rgb['a']) * 255).toString(16);
-        ////console.log(m);
-        var v = component2Hex(m);
-        ////console.log(v);
-        p = p + component2Hex(m);
+    ////console.log('!');
+    var m = Math.round(parseFloat(rgb['a']) * 255).toString(16);
+    ////console.log(m);
+    var v = component2Hex(m);
+    ////console.log(v);
+    p = p + component2Hex(m);
     //}
     ////console.log(p);
     return p;
@@ -598,7 +597,7 @@ function parseColor(colorStr) {
         //console.log(hp);
         //console.log(sp);
         //console.log(lp);
-        const parsedColor = {h: hp, s: sp, l: lp, a: parseFloat(alpha[0])};
+        const parsedColor = { h: hp, s: sp, l: lp, a: parseFloat(alpha[0]) };
         //console.log(parsedColor);
         const ggg = new UserColor({
             /*color: {
@@ -606,7 +605,8 @@ function parseColor(colorStr) {
                 s: sp,
                 l: lp,
                 a: parseFloat(alpha[0])
-            }*/color: parsedColor,
+            }*/
+            color: parsedColor,
             format: 'hsla'
         });
         //console.log(ggg);
@@ -619,10 +619,11 @@ function parseColor(colorStr) {
             },
             format: 'hsla'
         });*/
-       return ggg;
+        return ggg;
     }
     return false;
 }
+
 "use strict"
 var addAMark, gradient;
 console.time("hex");
@@ -705,12 +706,12 @@ function GradientCSS(options) {
     }
 }
 
-GradientCSS.prototype.addStopMarker = function (listElements, mark, specialCase) {
+GradientCSS.prototype.addStopMarker = function(listElements, mark, specialCase) {
     var c = mark.location,
         i = 0,
         res = [];
     res = res.concat(listElements, [mark]);
-    res.sort(function (a, b) {
+    res.sort(function(a, b) {
         return a.location - b.location;
     });
     for (i = 0; i < res.length; i++) {
@@ -752,7 +753,7 @@ GradientCSS.prototype.addStopMarker = function (listElements, mark, specialCase)
     this.colorStops = res;
 };
 
-GradientCSS.prototype.removeStopMarker = function (listElements, location, value) {
+GradientCSS.prototype.removeStopMarker = function(listElements, location, value) {
     var i, k, res, cond, l = listElements.length,
         elem = false;
     if (listElements.length <= 2)
@@ -781,7 +782,7 @@ GradientCSS.prototype.removeStopMarker = function (listElements, location, value
     return elem;
 };
 
-GradientCSS.prototype.getStopMarker = function (location, specialCase) {
+GradientCSS.prototype.getStopMarker = function(location, specialCase) {
     console.log(location);
     var i, c = this.colorStops,
         l = c.length,
@@ -806,7 +807,7 @@ GradientCSS.prototype.getStopMarker = function (location, specialCase) {
     }
 };
 
-GradientCSS.prototype.showAllColorStops = function () {
+GradientCSS.prototype.showAllColorStops = function() {
     var i, c = this.colorStops,
         l = c.length - 1;
     $(".stop-markers").html("");
@@ -816,13 +817,13 @@ GradientCSS.prototype.showAllColorStops = function () {
     }
 };
 
-GradientCSS.prototype.updateGradientEditor = function () {
+GradientCSS.prototype.updateGradientEditor = function() {
     var css = "linear-gradient(to right," + getPoints(this.colorStops, "rgba");
     EDITOR.css("background-image", css);
     console.log(css);
 }
 
-GradientCSS.prototype.updateGradientPreview = function () {
+GradientCSS.prototype.updateGradientPreview = function() {
     var css, target;
     target = this.gradientIndex[this.priority];
     if (this.colorStopHSL) {
@@ -836,7 +837,7 @@ GradientCSS.prototype.updateGradientPreview = function () {
     target.mini_preview.css("background-image", css);
 }
 
-GradientCSS.prototype.updateMarks = function (colorLists) {
+GradientCSS.prototype.updateMarks = function(colorLists) {
     console.log(colorLists);
     var color, block, i, l = colorLists.length;
     for (i = 0; i < l; i++) {
@@ -848,7 +849,7 @@ GradientCSS.prototype.updateMarks = function (colorLists) {
     }
 }
 
-GradientCSS.prototype.saveHSLStops = function () {
+GradientCSS.prototype.saveHSLStops = function() {
     if (!this.colorStopHSL || this.colorStopHSL.length === 0)
         return null;
     var i, j, color, colorstop, colorRgba, index = this.gradientIndex,
@@ -873,7 +874,7 @@ GradientCSS.prototype.saveHSLStops = function () {
     $(".adjust-color").hide();
 };
 
-GradientCSS.prototype.changeFormatColor = function (colorFormat) {
+GradientCSS.prototype.changeFormatColor = function(colorFormat) {
     var i, index = this.gradientIndex,
         l = index.length;
     for (i = 0; i < l; i++) {
@@ -896,7 +897,7 @@ function _changeFormat(colorStops, format) {
     return text;
 }
 
-GradientCSS.prototype.showFormatColor = function (colorFormat) { ///////////////////////////////////////////////
+GradientCSS.prototype.showFormatColor = function(colorFormat) { ///////////////////////////////////////////////
     console.log(colorFormat);
     var j, value = "",
         order = gradient.order,
@@ -927,7 +928,7 @@ function _showFormat(colorStops, format) {
     return text;
 }
 
-GradientCSS.prototype.updateHSLLevels = function (hue, saturation, lightness) {
+GradientCSS.prototype.updateHSLLevels = function(hue, saturation, lightness) {
     this.colorStopHSL = [];
 
     var a = this.colorStopHSL,
@@ -982,14 +983,14 @@ function _changeHSLLevels(colorStop, hue, saturation, lightness, index, a, x, pr
     return text;
 }
 
-GradientCSS.prototype.reverseGradient = function () {
+GradientCSS.prototype.reverseGradient = function() {
     this.colorStops = _reverseMarks(this.colorStops, this.widthDefault);
     this.updateGradientPreview();
     this.updateGradientEditor();
     _updateGradientCSS(["bg_image"]);
 };
 
-GradientCSS.prototype.getCssCode = function () {
+GradientCSS.prototype.getCssCode = function() {
     var repeat, type, text = "";
     type = this.type;
     repeat = this.repeat;
@@ -1073,18 +1074,18 @@ function eventDraggable(containmentClass, element) {
     element.draggable({
         axis: "x",
         containment: containmentClass,
-        start: function (event, ui) {
+        start: function(event, ui) {
             draggedMarker = gradient.getStopMarker(parseInt(ui.helper.attr("position"))); //1
             _getActiveElement().removeClass("selected");
             $(this).addClass("selected");
         },
-        drag: function (event) {
+        drag: function(event) {
             draggedMarker = _dragAndDrop(gradient, this, draggedMarker);
             gradient.updateGradientEditor();
             gradient.updateGradientPreview();
             _updateGradientCSS(["bg_image"]);
         },
-        stop: function (event) {
+        stop: function(event) {
             draggedMarker = _dragAndDrop(gradient, this, draggedMarker);
             draggedMarker = null;
             gradient.showAllColorStops();
@@ -1673,8 +1674,8 @@ function _CSSValueParser(value, start) {
     }
     containerHolder.sortable({
         handle: ".grad__handle",
-        start: function (event, ui) { },
-        update: function (event, ui) {
+        start: function(event, ui) {},
+        update: function(event, ui) {
             _updateContainer();
         },
     });
@@ -1728,7 +1729,7 @@ function G(id, cssvalue, bg_size_value, bg_pos_value, bg_repeat_value, bg_color_
     return reu;
 }
 
-G.prototype.createSpinner = function (spinner1, selectbox1, selectbox2) {
+G.prototype.createSpinner = function(spinner1, selectbox1, selectbox2) {
     var id = this.id,
         min;
     if (selectbox1.data("target") === "bg_size") {
@@ -1740,16 +1741,16 @@ G.prototype.createSpinner = function (spinner1, selectbox1, selectbox2) {
     spinner1.spinner({
         max: 999,
         min: min,
-        create: function () {
+        create: function() {
             var widget = $(this).spinner("widget");
             widget.css("float", "left");
         },
-        spin: function (event, ui) {
+        spin: function(event, ui) {
             _updateSpinner(ui.value, id, selectbox1, selectbox2);
         }
     });
 
-    spinner1.on("keyup", function (event, ui) {
+    spinner1.on("keyup", function(event, ui) {
         _updateSpinner($(this).val(), id, selectbox1, selectbox2);
     });
 }
@@ -1779,14 +1780,14 @@ function _closeAllDropDowns() {
     $(".grad__view-css").removeClass("is-checked");
 }
 
-G.prototype.createSelectBox = function (values, selectbox1, selectbox2, selectmenu1, selectmenu2, spinner1, spinner2, selected1, selected2) {
+G.prototype.createSelectBox = function(values, selectbox1, selectbox2, selectmenu1, selectmenu2, spinner1, spinner2, selected1, selected2) {
     var x, option, id = this.id,
         d = values.length,
         options = $("<div class='bg-options'></div>");
 
     for (x = 0; x < d; x++) {
         option = $("<div class='bg-option' data-value='" + values[x] + "'><span>" + values[x] + "</span></div>");
-        option.click(function () {
+        option.click(function() {
             //selected1.removeClass("is-visible");
             var xv = $(this).data("value"),
                 yv = selectmenu2.attr("value");
@@ -1845,7 +1846,7 @@ G.prototype.createSelectBox = function (values, selectbox1, selectbox2, selectme
     return options;
 }
 
-G.prototype.createBgElem = function (data, selectbox1, selectbox2, selectmenu1, selectmenu2, spinner1, spinner2, selected1, selected2, container) {
+G.prototype.createBgElem = function(data, selectbox1, selectbox2, selectmenu1, selectmenu2, spinner1, spinner2, selected1, selected2, container) {
     var values = data.options,
         elem1 = data.value,
         u1 = data.unit;
@@ -1858,7 +1859,7 @@ G.prototype.createBgElem = function (data, selectbox1, selectbox2, selectmenu1, 
     selectmenu1.append(options);
     selectbox1.append(selectmenu1);
 
-    selected1.click(function () {
+    selected1.click(function() {
         _closeAllDropDowns();
         if (container.hasClass("freeze")) {
             return;
@@ -1894,7 +1895,7 @@ G.prototype.createBgElem = function (data, selectbox1, selectbox2, selectmenu1, 
     return selectbox1;
 }
 
-G.prototype.filterSize = function (bg_size_value) {
+G.prototype.filterSize = function(bg_size_value) {
     console.log(bg_size_value);
     var a, bg_size_u1, bg_size_u2, bg_size_s1, bg_size_s2, v = {};
     bg_size_value = bg_size_value.replace(/\s/g, "");
@@ -1937,7 +1938,7 @@ G.prototype.filterSize = function (bg_size_value) {
     return v;
 };
 
-G.prototype.filterPos = function (bg_pos_value) {
+G.prototype.filterPos = function(bg_pos_value) {
     bg_pos_value = bg_pos_value.replace(/\s/g, "");
     console.log(bg_pos_value);
     var bg_pos_u1, bg_pos_u2, bg_pos_s1, bg_pos_s2, v = {};
@@ -1963,7 +1964,7 @@ G.prototype.filterPos = function (bg_pos_value) {
     return v;
 };
 
-G.prototype.createSize = function (bg_size_value, container) {
+G.prototype.createSize = function(bg_size_value, container) {
     console.log(bg_size_value);
     var r = {},
         data = {},
@@ -1993,7 +1994,7 @@ G.prototype.createSize = function (bg_size_value, container) {
     return r;
 }
 
-G.prototype.createPos = function (bg_pos_value, container) {
+G.prototype.createPos = function(bg_pos_value, container) {
     var r = {},
         data = {},
         k = this.filterPos(bg_pos_value),
@@ -2023,7 +2024,7 @@ G.prototype.createPos = function (bg_pos_value, container) {
     return r;
 }
 
-G.prototype.createRepeat = function (value, container) {
+G.prototype.createRepeat = function(value, container) {
 
 
     value = value.replace(/\s/g, "");
@@ -2038,7 +2039,7 @@ G.prototype.createRepeat = function (value, container) {
 
     selected.data("index", s);
     selected.css("background-position", pos[s]);
-    selected.click(function () {
+    selected.click(function() {
 
         if (container.hasClass("freeze")) {
             return;
@@ -2061,10 +2062,10 @@ G.prototype.createRepeat = function (value, container) {
     return bg_repeat;
 }
 
-G.prototype.createParse = function (id, container, preview) {
+G.prototype.createParse = function(id, container, preview) {
     var gradientAux, holder = $("<div class='grad__preview gradient-background'></div>");
     holder.append(preview);
-    preview.click(function () {
+    preview.click(function() {
         if (container.hasClass("freeze")) {
             return;
         }
@@ -2093,10 +2094,10 @@ function _secLoadGrad(id) {
     });
 }
 
-G.prototype.createHide = function (id, container) {
+G.prototype.createHide = function(id, container) {
     var $this = this,
         hide = $("<input class='grad__hide' type='checkbox' title='hide'/>");
-    hide.change(function () {
+    hide.change(function() {
         console.log("change");
         var selectbox1 = $this.size,
             selectbox2 = $this.pos,
@@ -2124,11 +2125,11 @@ G.prototype.createHide = function (id, container) {
     return hide;
 }
 
-G.prototype.createRemove = function (container) {
+G.prototype.createRemove = function(container) {
     var id = this.id,
         remove = $("<div class='grad__remove' title='remove'></div>");
     console.log(id);
-    remove.click(function () {
+    remove.click(function() {
         console.log(id);
         console.log(gradient.priority);
         console.log(gradient.order);
@@ -2176,9 +2177,9 @@ function _updateContainer() {
     _updateGradientCSS(["bg_image", "bg_size", "bg_position", "bg_repeat", "bg_color"]);
 }
 
-G.prototype.createView = function (id, cssvalue, bg_size_value, bg_pos_value, bg_repeat_value, container) {
+G.prototype.createView = function(id, cssvalue, bg_size_value, bg_pos_value, bg_repeat_value, container) {
     var view = $("<div class='grad__view-css' title='view CSS code'></div>");
-    view.click(function () {
+    view.click(function() {
 
         if (container.hasClass("freeze")) {
             return;
@@ -2199,7 +2200,7 @@ G.prototype.createView = function (id, cssvalue, bg_size_value, bg_pos_value, bg
                 css_container_codes = $("<div class='grad__css' id='js-copy-" + id + "'><div>background-image: " + d.bg_image + ";</div><div>background-size: " + d.bg_size + ";</div><div>background-position: " + d.bg_position + ";</div><div>background-repeat: " + d.bg_repeat + ";</div></div>"),
                 css_container_copy = $("<button class='grad__css__copy' data-clipboard-action='copy' data-clipboard-target='#js-copy-" + id + "'>copy</button>");
 
-            css_container_close.click(function () {
+            css_container_close.click(function() {
                 css_container.hide();
                 view.removeClass("is-checked");
             });
@@ -2216,7 +2217,7 @@ G.prototype.createView = function (id, cssvalue, bg_size_value, bg_pos_value, bg
 }
 
 //////////////////////////////////////////-----------------------------------------------------------------------------------////
-$(document).ready(function () {
+$(document).ready(function() {
     addAMark = true;
     gradient = firstLoad();
     gradient.showAllColorStops();
@@ -2240,8 +2241,8 @@ function firstLoad() {
     var hash = window.location.hash;
     if (hash && hash.length > 0) {
         hash = unescape(hash);
-        hash = hash.replace(/\\/g, '');//////////////////////////////////////
-        hash = hash.replace(/'/g, '');/////////////////////////////////////
+        hash = hash.replace(/\\/g, ''); //////////////////////////////////////
+        hash = hash.replace(/'/g, ''); /////////////////////////////////////
         hash = hash.substr(1);
         $(".current").attr("style", hash); ///fall back
         console.log(hash);
@@ -2330,7 +2331,7 @@ function _getGradientCSS(properties) {
     return a;
 }
 
-$(".setting__value").click(function (e) {
+$(".setting__value").click(function(e) {
     var type, value, $this;
     $this = $(this);
     type = $this.data("type");
@@ -2346,34 +2347,34 @@ $(".setting__value").click(function (e) {
     //e.preventDefault();//--------------------------------------------------------------
 });
 
-$(".setting__value[data-type='type']").click(function () {
+$(".setting__value[data-type='type']").click(function() {
     _updateTypeSetting();
 });
 
-$(".setting__value[data-type='radialShape'][data-value='circle']").click(function () {
+$(".setting__value[data-type='radialShape'][data-value='circle']").click(function() {
     $("#sy").hide();
     $("#radial-vertical-size-unit").hide();
     $("#radial-horizontal-size-unit option[value=p]").hide();
 });
 
-$(".setting__value[data-type='radialShape'][data-value='ellipse']").click(function () {
+$(".setting__value[data-type='radialShape'][data-value='ellipse']").click(function() {
     $("#sy").show();
     $("#radial-vertical-size-unit").show();
     $("#radial-horizontal-size-unit option[value=p]").show();
 });
 
-$("#color-location").on("keyup", function (e) {
+$("#color-location").on("keyup", function(e) {
     gradient.saveHSLStops();
     var position = _getFromField($(this).val(), 0, 100, $("#color-location"));
     _refreshLocation(_getActiveElement(), parseInt(position), gradient);
-    e.preventDefault();//--------------------------------------------------------------
+    e.preventDefault(); //--------------------------------------------------------------
     return false;
 });
 
 $("#color-location").spinner({
     min: 0,
     max: 100,
-    spin: function (e, ui) {
+    spin: function(e, ui) {
         gradient.saveHSLStops();
         _refreshLocation(_getActiveElement(), ui.value, gradient);
         $("#color-location-slider-bar").slider("value", ui.value);
@@ -2385,14 +2386,14 @@ $("#color-location-slider-bar").slider({
     min: 0,
     max: 100,
     step: 1,
-    slide: function (event, ui) {
+    slide: function(event, ui) {
         gradient.saveHSLStops();
         $("#color-location").val(ui.value);
         _refreshLocation(_getActiveElement(), ui.value, gradient);
     },
 });
 
-$("#color-delete-button").click(function (e) {
+$("#color-delete-button").click(function(e) {
     gradient.saveHSLStops();
     var activeElement = $(".stop-markers .selected");
     if (activeElement.length === 0) {
@@ -2415,7 +2416,7 @@ $("#color-delete-button").click(function (e) {
     return false;
 });
 
-$(".stop-markers").click(function (e) {
+$(".stop-markers").click(function(e) {
     console.log("father");
     if (addAMark) {
         var color, position, colorString;
@@ -2441,7 +2442,7 @@ $(".stop-markers").click(function (e) {
     e.stopPropagation();
 });
 
-$(".stop-markers").on("click", ".color-knob", function (e) {
+$(".stop-markers").on("click", ".color-knob", function(e) {
     console.log("mother");
     gradient.saveHSLStops();
     addAMark = false;
@@ -2455,7 +2456,7 @@ $(".stop-markers").on("click", ".color-knob", function (e) {
     return false;
 });
 
-$("#reset-button").click(function () {
+$("#reset-button").click(function() {
     $(".grads__container").html("");
     $(".current").css("background", "repeating-radial-gradient(ellipse farthest-corner at left top, rgba(0,165,223,1) 0%, rgba(62,20,123,1) 20%, rgba(226,0,121,1) 40%, rgba(223,19,44,1) 60%, rgba(243,239,21,1) 80%, rgba(0,152,71,1) 100%)");
     gradient = loadGradient($(".current"), gradient.format);
@@ -2467,13 +2468,13 @@ $("#reset-button").click(function () {
     _initSettings();
 });
 
-$(".reverse-btn").click(function () {
+$(".reverse-btn").click(function() {
     gradient.saveHSLStops();
     gradient.reverseGradient();
     _selectAMark();
 });
 
-$("#add-gradient-accept").click(function () {
+$("#add-gradient-accept").click(function() {
     var a, b, c, css, id = gradient.gradientIndex.length;
     css = _formatCss($(".add-gradient__input").val(), $("#test"));
     console.log(css);
@@ -2488,7 +2489,7 @@ $("#add-gradient-accept").click(function () {
     $(".add-gradient").hide();
 });
 
-$("#import-css-button-ok").click(function () {
+$("#import-css-button-ok").click(function() {
     if (CSS.supports("background-image", $("#import-css-area").val())) {
 
 
@@ -2515,7 +2516,7 @@ $("#import-css-button-ok").click(function () {
     //    alert("Couldn\"t parse gradient CSS.\nPlease check the format and try again.");
 });
 
-$(".presets-list").on("click", ".load-preset", function () {
+$(".presets-list").on("click", ".load-preset", function() {
     console.log("click");
     $(".grads__container").html("");
     $(".load-preset").removeClass("actual");
@@ -2532,7 +2533,7 @@ $(".presets-list").on("click", ".load-preset", function () {
     //}
 });
 
-$(".codepen").click(function () {
+$(".codepen").click(function() {
     var c = gradient.showFormatColor(gradient.format),
         d = _getGradientCSS(["bg_size", "bg_position", "bg_repeat", "bg_color"]),
         HTML = "<div id='gradient'></div>",
@@ -2545,11 +2546,11 @@ $(".codepen").click(function () {
     form.submit();
 });
 
-$("#get-css-btn").click(function () {
+$("#get-css-btn").click(function() {
     $("#get-css-dialog").dialog("open");
 });
 
-$("#import-css-btn").click(function () {
+$("#import-css-btn").click(function() {
     $("#import-css-dialog").dialog("open");
 });
 
@@ -2565,13 +2566,13 @@ $("#import-css-dialog").dialog({
     autoOpen: false
 });
 
-$("#report-bug-btn").click(function () {
+$("#report-bug-btn").click(function() {
     var value = "file:///home/ko_ko/Downloads/gradient-editor/gradient-editor/contact.html";
     window.open(value);
 });
 
 PREVIEW.resizable({
-    resize: function (event, ui) {
+    resize: function(event, ui) {
         var w = $(this).width(),
             h = $(this).height();
         $("#resizable-width").val(w);
@@ -2582,40 +2583,40 @@ PREVIEW.resizable({
 $(".add-gradient").hide();
 $(".adjust-color").hide();
 
-$("#add-gradient-cancel").click(function () {
+$("#add-gradient-cancel").click(function() {
     $(".add-gradient").hide();
 });
 
-$("#add-gradient-btn").click(function () {
+$("#add-gradient-btn").click(function() {
     $(".adjust-color").hide();
     $(".add-gradient").show();
 });
 
-$("#adjust-color-btn").click(function () {
+$("#adjust-color-btn").click(function() {
     $(".add-gradient").hide();
     $(".adjust-color").show();
 });
 
-$("#adjust-color-accept").click(function () {
+$("#adjust-color-accept").click(function() {
     gradient.saveHSLStops();
     $(".adjust-color").hide();
 });
 
-$("#adjust-color-cancel").click(function () {
+$("#adjust-color-cancel").click(function() {
     gradient.updateHSLLevels(0, 0, 0);
     _resetPanel();
     $(".adjust-color").hide();
 });
 
-$("#resizable-width").on("keyup", function () {
+$("#resizable-width").on("keyup", function() {
     $("#gradient-preview .gradient-real").css("width", $(this).val());
 });
 
-$("#resizable-height").on("keyup", function () {
+$("#resizable-height").on("keyup", function() {
     $("#gradient-preview .gradient-real").css("height", $(this).val());
 });
 
-$(document).click(function (e) {
+$(document).click(function(e) {
     var target = e.target;
     if ($(target).hasClass("bg-selected")) {
         $(".grad__css-container").remove();
@@ -2630,7 +2631,7 @@ $(document).click(function (e) {
     }
 });
 
-$(".panel__toggle").click(function () {
+$(".panel__toggle").click(function() {
     var $this = $(this),
         p = $this.parent().next();
     if (($this).hasClass("toggle-on")) {
@@ -2730,18 +2731,18 @@ function _createColorSetting() {
         palette: [
             ["red", "rgba(0, 255, 0, .5)", "rgb(0, 0, 255)"],
         ],
-        change: function (color) {
+        change: function(color) {
             var rgb = color.toRgbString(),
                 pc = parseColor(rgb);
             updateInfo(pc);
             console.log(pc);
         },
-        move: function (color) {
+        move: function(color) {
             var rgb = color.toRgbString(),
                 pc = parseColor(rgb);
             updateInfo(pc);
         },
-        show: function () {
+        show: function() {
             var elem = _getActiveElement(),
                 left = elem.offset().left,
                 top = elem.offset().top + 52,
@@ -2760,12 +2761,12 @@ function _createColorSetting() {
         palette: [
             ["red", "rgba(0, 255, 0, .5)", "rgb(0, 0, 255)"],
         ],
-        change: function (color) {
+        change: function(color) {
             var rgba = color.toRgbString();
             gradient.backgroundColor = rgba;
             _updateGradientCSS(["bg_color"]);
         },
-        move: function (color) {
+        move: function(color) {
             var rgba = color.toRgbString();
             gradient.backgroundColor = rgba;
             _updateGradientCSS(["bg_color"]);
@@ -2778,7 +2779,7 @@ function _createSizeSetting() {
         min: 0,
         max: 999,
         value: 0,
-        spin: function (e, ui) {
+        spin: function(e, ui) {
             var value1 = ui.value,
                 value2 = $("#sy").val(),
                 unit1 = $("#radial-horizontal-size-unit").val(),
@@ -2791,7 +2792,7 @@ function _createSizeSetting() {
         min: 0,
         max: 999,
         value: 0,
-        spin: function (e, ui) {
+        spin: function(e, ui) {
             var value1 = ui.value,
                 value2 = $("#sx").val(),
                 unit1 = $("#radial-vertical-size-unit").val(),
@@ -2800,7 +2801,7 @@ function _createSizeSetting() {
         }
     });
 
-    $("#sx").on("keyup", function () {
+    $("#sx").on("keyup", function() {
         var value1 = _getFromField($(this).val(), -999, 999, $("#sx")),
             value2 = $("#sy").val(),
             unit1 = $("#radial-horizontal-size-unit").val(),
@@ -2808,7 +2809,7 @@ function _createSizeSetting() {
         _updateRadialHorizontalSize(value1, value2, unit1, unit2);
     });
 
-    $("#sy").on("keyup", function () {
+    $("#sy").on("keyup", function() {
         var value1 = _getFromField($(this).val(), -999, 999, $("#sy")),
             value2 = $("#sx").val(),
             unit1 = $("#radial-vertical-size-unit").val(),
@@ -2816,7 +2817,7 @@ function _createSizeSetting() {
         _updateRadialVerticalSize(value1, value2, unit1, unit2);
     });
 
-    $("#radial-horizontal-size-unit").on("change", function () {
+    $("#radial-horizontal-size-unit").on("change", function() {
         console.log("change1111");
         var value = $(this).val();
         if (value === "p") {
@@ -2828,7 +2829,7 @@ function _createSizeSetting() {
         _updateGradientCSS(["bg_image"]);
     });
 
-    $("#radial-vertical-size-unit").on("change", function () {
+    $("#radial-vertical-size-unit").on("change", function() {
         console.log("change1111");
         var value = $(this).val();
         if (value === "p") {
@@ -2905,7 +2906,7 @@ function _createPosSetting() {
             min: -999,
             max: 999,
             value: 0,
-            spin: function (e, ui) {
+            spin: function(e, ui) {
                 var value = ui.value;
                 var unit = elem2.val();
                 if (unit === "p") {
@@ -2920,7 +2921,7 @@ function _createPosSetting() {
             }
         });
 
-        elem1.on("keyup", function () {
+        elem1.on("keyup", function() {
             var key = $(this).val();
             var value = _getFromField(key, -999, 999, elem1);
             var unit = elem2.val();
@@ -2933,7 +2934,7 @@ function _createPosSetting() {
             _updateGradientCSS(["bg_image"]);
         });
 
-        elem2.on("change", function () {
+        elem2.on("change", function() {
             var value = $(this).val();
             if (value === "p") {
                 value = "%";
@@ -2966,7 +2967,7 @@ function _createAngSetting() {
     function _createAngleValueElems(elem1, elem2, code) {
         elem2.anglepicker({
             value: 0,
-            change: function (e, ui) {
+            change: function(e, ui) {
                 console.log("trigger");
                 var value = ui.value;
                 _updateAngleValue(value, code);
@@ -2974,7 +2975,7 @@ function _createAngSetting() {
             },
         });
 
-        elem1.on("keyup", function (e) {
+        elem1.on("keyup", function(e) {
             var value = _getFromField($(this).val(), 0, 360, elem1);
             _updateAngleValue(value, code);
             elem2.anglepicker("value", value);
@@ -2984,7 +2985,7 @@ function _createAngSetting() {
             min: 0,
             max: 360,
             value: 0,
-            spin: function (e, ui) {
+            spin: function(e, ui) {
                 var value = ui.value;
                 _updateAngleValue(value, code);
                 elem2.anglepicker("value", value);
@@ -2995,7 +2996,7 @@ function _createAngSetting() {
 
 function _sliderBarsHSL() {
     var HslFunctions = [
-        function (value) {
+        function(value) {
             var h = parseFloat(value),
                 s = parseFloat($("#saturation").val()),
                 l = parseFloat($("#lightness").val());
@@ -3003,7 +3004,7 @@ function _sliderBarsHSL() {
             _updateLightnessSlider($("#lightness-bar"), Math.round((h + 360 + 180) % 360), Math.round((s + 100) / 2));
             gradient.updateHSLLevels(h, s, l);
         },
-        function (value) {
+        function(value) {
             var h = parseFloat($("#hue").val()),
                 s = parseFloat(value),
                 l = parseFloat($("#lightness").val());
@@ -3015,7 +3016,7 @@ function _sliderBarsHSL() {
                 Math.round((l + 100) / 2));
             gradient.updateHSLLevels(h, s, l);
         },
-        function (value) {
+        function(value) {
             var h = (parseFloat($("#hue").val()) + 360) % 360,
                 s = parseFloat($("#saturation").val()),
                 l = parseFloat(value);
@@ -3027,7 +3028,7 @@ function _sliderBarsHSL() {
                 Math.round((l + 100) / 2));
             gradient.updateHSLLevels(h, s, l);
         },
-        function (value) {
+        function(value) {
             //gradient.updateOpacityLevels(value);
         }
     ];
@@ -3041,7 +3042,7 @@ function _sliderBarsHSL() {
     }
 
     function _createHslElems(element, min, max, fun, index) {
-        $("#" + element).on("keyup", function (e) {
+        $("#" + element).on("keyup", function(e) {
             var value = _getFromField($(this).val(), -180, 180, $("#" + element));
             $("#" + element + "-bar").slider("value", value);
             HslFunctions[index](value);
@@ -3052,7 +3053,7 @@ function _sliderBarsHSL() {
             min: min,
             max: max,
             step: 1,
-            spin: function (event, ui) {
+            spin: function(event, ui) {
                 var value = ui.value;
                 $("#" + element + "-bar").slider("value", value);
                 HslFunctions[index](value);
@@ -3064,7 +3065,7 @@ function _sliderBarsHSL() {
             min: min,
             max: max,
             step: 1,
-            slide: function (event, ui) {
+            slide: function(event, ui) {
                 var value = ui.value;
                 $("#" + element).val(value);
                 HslFunctions[index](value);
@@ -3270,7 +3271,7 @@ function _updateTypeSetting() {
     $(".setting__value[data-type='type'][data-value='" + type + "']").addClass("setting__value--active");
 }
 
-$(".setting__value[data-type='linearOrientation']").click(function () {
+$(".setting__value[data-type='linearOrientation']").click(function() {
     $("#linear-angle-picker").removeClass("anglepicker--active");
 });
 
@@ -3322,7 +3323,7 @@ function _getFromField(value, min, max, elem) {
     return val;
 }
 
-$("#save-preset-btn").click(function () {
+$("#save-preset-btn").click(function() {
     var swatches16 = localStorage.getItem("swatches16");
     var css = _getGradientCSS(["bg_image", "bg_size", "bg_position", "bg_repeat", "bg_color"]);
     var bg_img_css = { v: css.bg_image, w: css.bg_size, x: css.bg_position, y: css.bg_repeat, z: css.bg_color };
@@ -3340,7 +3341,7 @@ $("#save-preset-btn").click(function () {
     _importGradientFromLocalStorage(swatches16.length - 1, swatches16[swatches16.length - 1]);
 });
 
-$("#delete-preset-btn").click(function () {
+$("#delete-preset-btn").click(function() {
     var i, item, index, swatches16;
     i = $(".actual").data("index");
     console.log(i);
@@ -3361,18 +3362,18 @@ $("#delete-preset-btn").click(function () {
     }
 });
 
-$(".facebook").click(function () {
+$(".facebook").click(function() {
     var value = "https://www.facebook.com/sharer/sharer.php?u=www.cssgradienteditor.com";
     window.open(value);
 });
 
-$(".twitter").click(function () {
+$(".twitter").click(function() {
     var value = "https://twitter.com/intent/tweet?url=https://www.cssgradienteditor.com&text=";
     window.open(value);
 });
 
 $("#color-format").selectmenu({
-    change: function () {
+    change: function() {
         gradient.saveHSLStops();
         var format = $(this).val(); /////
         console.log(format);
@@ -3381,7 +3382,7 @@ $("#color-format").selectmenu({
     }
 });
 
-$("#do").click(function () {
+$("#do").click(function() {
     var activeElement = _getActiveElement(),
         location = activeElement.attr("position");
     console.log(typeof location);
@@ -3389,13 +3390,13 @@ $("#do").click(function () {
     console.log(gradient.showFormatColor("hex"));
 });
 
-$(window).onerror = function (message, source, lineno, colno, error) {
+$(window).onerror = function(message, source, lineno, colno, error) {
     if (error) {
         console.log(error.stack);
     }
 }
 
-$("#format").click(function () {
+$("#format").click(function() {
     $("#dialog-2").dialog("open");
     var t = gradient.showFormatColor("hsla");
     var u = gradient.showFormatColor("hex");
@@ -3416,12 +3417,12 @@ $("#format").click(function () {
     console.log(CSS.supports("background-image", u));
 });
 
-$("#gradient").click(function () {
+$("#gradient").click(function() {
     console.log(gradient);
     _updateGradientCSS(["bg_image", "bg_size", "bg_position", "bg_repeat", "bg_color"]);
 });
 
-$("#update-value-btn").click(function () {
+$("#update-value-btn").click(function() {
     var value, d = _getGradientCSS(["bg_image", "bg_size", "bg_position", "bg_repeat", "bg_color"], true);
     value = "background-image:" + d.bg_image + "; background-size:" + d.bg_size + "; background-position:" + d.bg_position + "; background-repeat:" + d.bg_repeat + "; background-color: " + d.bg_color + ";";
     value = escape(value).replace(/%/g, '\\%').replace(/\./g, '\\.').replace(/\-/g, '\\-');
@@ -3440,25 +3441,25 @@ function addAGrad() {
         this.colorDefault0 = new UserColor({ "format": "rgba", "color": { "r": 46, "g": 84, "b": 117, "a": 1 } }),
         this.colorDefault1 = new UserColor({ "format": "rgba", "color": { "r": 255, "g": 37, "b": 0, "a": 1 } }),
         this.colorStops = [{
-            "color": this.colorDefault0.clone(),
-            "location": 10,
-            "htmlBlock": _createStopMarkerMini(0, {
-                "color": this.colorDefault0,
-                "location": 10
-            }, this.widthDefault)
-        },
-        {
-            "color": this.colorDefault1.clone(),
-            "location": 90,
-            "htmlBlock": _createStopMarkerMini(1, {
-                "color": this.colorDefault1,
-                "location": 90
-            }, this.widthDefault)
-        }
+                "color": this.colorDefault0.clone(),
+                "location": 10,
+                "htmlBlock": _createStopMarkerMini(0, {
+                    "color": this.colorDefault0,
+                    "location": 10
+                }, this.widthDefault)
+            },
+            {
+                "color": this.colorDefault1.clone(),
+                "location": 90,
+                "htmlBlock": _createStopMarkerMini(1, {
+                    "color": this.colorDefault1,
+                    "location": 90
+                }, this.widthDefault)
+            }
         ];
 }
 
-addAGrad.prototype.getStopMarker = function (location, slider) {
+addAGrad.prototype.getStopMarker = function(location, slider) {
     var i, c = this.colorStops,
         l = c.length,
         res = false;
@@ -3482,12 +3483,12 @@ addAGrad.prototype.getStopMarker = function (location, slider) {
     }
 }
 
-addAGrad.prototype.addStopMarker = function (listElements, mark, specialCase) {
+addAGrad.prototype.addStopMarker = function(listElements, mark, specialCase) {
     var c = mark.location,
         i = 0,
         res = [];
     res = res.concat(listElements, [mark]);
-    res.sort(function (a, b) {
+    res.sort(function(a, b) {
         return a.location - b.location;
     });
     for (i = 0; i < res.length; i++) {
@@ -3528,7 +3529,7 @@ addAGrad.prototype.addStopMarker = function (listElements, mark, specialCase) {
     this.colorStops = res;
 }
 
-addAGrad.prototype.removeStopMarker = function (listElements, location, value) {
+addAGrad.prototype.removeStopMarker = function(listElements, location, value) {
     var i, k, res, cond, l = listElements.length,
         elem = false;
 
@@ -3558,7 +3559,7 @@ addAGrad.prototype.removeStopMarker = function (listElements, location, value) {
     return elem;
 }
 
-addAGrad.prototype.showAllColorStops = function () {
+addAGrad.prototype.showAllColorStops = function() {
     var i, c = this.colorStops,
         l = c.length - 1;
     $(".add-gradient__stop-markers").html("");
@@ -3568,7 +3569,7 @@ addAGrad.prototype.showAllColorStops = function () {
     }
 }
 
-addAGrad.prototype.updateMarks = function (colorLists) {
+addAGrad.prototype.updateMarks = function(colorLists) {
     var color, block, i, l = colorLists.length;
     for (i = 0; i < l; i++) {
         color = colorLists[i].color.displayColor("rgba");
@@ -3579,7 +3580,7 @@ addAGrad.prototype.updateMarks = function (colorLists) {
     }
 }
 
-addAGrad.prototype.updateGradient = function () {
+addAGrad.prototype.updateGradient = function() {
     //console.log("_updateGradient");
     var i, text = "",
         c = this.colorStops,
@@ -3638,16 +3639,16 @@ function eventDraggableMini(containmentClass, element) {
     element.draggable({
         axis: "x",
         containment: containmentClass,
-        start: function (event, ui) {
+        start: function(event, ui) {
             draggedMarker = newgrad.getStopMarker(parseInt(ui.helper.attr("position")), false); //1
             _getActiveElementMini().removeClass("selected");
             $(this).addClass("selected");
         },
-        drag: function (event) {
+        drag: function(event) {
             draggedMarker = _dragAndDropMini(this, draggedMarker);
             newgrad.updateGradient();
         },
-        stop: function (event) {
+        stop: function(event) {
             draggedMarker = _dragAndDropMini(this, draggedMarker);
             draggedMarker = null;
             newgrad.showAllColorStops();
@@ -3723,7 +3724,7 @@ newgrad.showAllColorStops();
 newgrad.updateGradient();
 _selectAMarkMini();
 
-$(".add-gradient__repeat").click(function () {
+$(".add-gradient__repeat").click(function() {
     if (repeat) {
         newgrad.repeat = false;
         $(this).removeClass("active");
@@ -3734,21 +3735,21 @@ $(".add-gradient__repeat").click(function () {
     updateGradient();
 });
 
-$("#mini-show").click(function () {
+$("#mini-show").click(function() {
     console.log(newgrad);
 });
 
 $("#add-gradient__color-location").spinner({
     min: 0,
     max: 100,
-    spin: function (e, ui) {
+    spin: function(e, ui) {
         _refreshLocationMini(_getActiveElementMini(), ui.value);
         newgrad.updateGradient();
     },
 });
 
 $("#mini-type-selectmenu").selectmenu({
-    change: function () {
+    change: function() {
         newgrad.type = $(this).val();
         newgrad.updateGradient();
     }
@@ -3779,7 +3780,7 @@ $("#add-gradient__color-value-button").spectrum({
 });
 */
 
-$(".add-gradient__stop-markers").on("click", function (e) {
+$(".add-gradient__stop-markers").on("click", function(e) {
     if (addAMarkMini) {
         var position = _calculatePosition(e.clientX - (this.offsetParent.offsetLeft + this.offsetLeft), newgrad.widthDefault);
         var colorString = $("#add-gradient__color-value-button").spectrum("get").toRgbString();
@@ -3796,7 +3797,7 @@ $(".add-gradient__stop-markers").on("click", function (e) {
     addAMarkMini = true;
 });
 
-$(".add-gradient__stop-markers").on("click", ".color-knob-mini", function (e) {
+$(".add-gradient__stop-markers").on("click", ".color-knob-mini", function(e) {
     addAMarkMini = false;
     var color = $(this).attr("color");
     var activeElement = _getActiveElementMini();
@@ -3809,7 +3810,7 @@ $(".add-gradient__stop-markers").on("click", ".color-knob-mini", function (e) {
     return false;
 });
 
-$("#add-gradient__delete").on("click", function (e) {
+$("#add-gradient__delete").on("click", function(e) {
     var activeElement = $(".add-gradient__stop-markers .selected");
     if (activeElement.length === 0) {
         return false;
