@@ -2417,7 +2417,6 @@ $("#color-delete-button").click(function(e) {
 });
 
 $(".stop-markers").click(function(e) {
-    console.log("father");
     if (addAMark) {
         var color, position, colorString;
         gradient.saveHSLStops();
@@ -2443,7 +2442,6 @@ $(".stop-markers").click(function(e) {
 });
 
 $(".stop-markers").on("click", ".color-knob", function(e) {
-    console.log("mother");
     gradient.saveHSLStops();
     addAMark = false;
     var activeElement = _getActiveElement(),
@@ -2490,13 +2488,6 @@ $("#add-gradient-accept").click(function() {
 });
 
 $("#import-css-button-ok").click(function() {
-    if (CSS.supports("background-image", $("#import-css-area").val())) {
-
-
-    } else {
-        alert("invalid css");
-    }
-
     $(".grads__container").html("");
     var style, value, options, gradientAux;
     value = _formatCss($("#import-css-area").val(), $("#test"));
@@ -3755,7 +3746,7 @@ $("#mini-type-selectmenu").selectmenu({
     }
 });
 
-/*
+
 $("#add-gradient__color-value-button").spectrum({
     color: "rgb(255, 37, 0)",
     preferredFormat: "rgb",
@@ -3776,9 +3767,17 @@ $("#add-gradient__color-value-button").spectrum({
         console.log(rgb);
         var pc = parseColor(rgb);
         updateInfoMini(pc);
-    }
+    },
+    show: function() {
+        var elem = _getActiveElementMini(),
+            left = elem.offset().left - 285,
+            top = elem.offset().top + 52,
+            container = $("#add-gradient__color-value-button").spectrum("container");
+        container.css("top", top + "px");
+        container.css("left", left + "px");
+        gradient.saveHSLStops();
+    },
 });
-*/
 
 $(".add-gradient__stop-markers").on("click", function(e) {
     if (addAMarkMini) {
@@ -3806,7 +3805,7 @@ $(".add-gradient__stop-markers").on("click", ".color-knob-mini", function(e) {
     _selectAMarkMini();
     console.log(color);
     $("#add-gradient__color-value-button").spectrum("set", color);
-    $("#add-gradient__color-value-button").spectrum("show");
+    $("#add-gradient__color-value-button").spectrum("toggle");
     return false;
 });
 
