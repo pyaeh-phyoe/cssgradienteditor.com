@@ -716,7 +716,6 @@ GradientCSS.prototype.addStopMarker = function(listElements, mark, specialCase) 
     });
     for (i = 0; i < res.length; i++) {
         if (res[i] === mark) {
-            console.log("moreen");
             console.log(mark);
             res[i]["htmlBlock"] = _createStopMarker(i, mark, this.widthDefault);
             res[i]["htmlBlock"].addClass("selected");
@@ -827,7 +826,6 @@ GradientCSS.prototype.updateGradientPreview = function() {
     var css, target;
     target = this.gradientIndex[this.priority];
     if (this.colorStopHSL) {
-        console.log("kkkkkkk");
         css = this.getCssCode() + getPoints(this.colorStopHSL[this.priority], this.format);
     } else {
         css = this.getCssCode() + getPoints(this.colorStops, this.format);
@@ -3380,12 +3378,6 @@ $("#do").click(function() {
     console.log(_getGradientCSS(["bg_image", "bg_size", "bg_position", "bg_repeat", "bg_color"]));
     console.log(gradient.showFormatColor("hex"));
 });
-
-$(window).onerror = function(message, source, lineno, colno, error) {
-    if (error) {
-        console.log(error.stack);
-    }
-}
 
 $("#format").click(function() {
     $("#dialog-2").dialog("open");
