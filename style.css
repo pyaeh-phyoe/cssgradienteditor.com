@@ -295,6 +295,7 @@ label {
     border-left: 0px;
     background-color: #f6f6f6;
     float: left;
+    margin: 0;
     -webkit-appearance: none;
 }
 
