@@ -294,6 +294,7 @@ label {
     border-radius: 0px 3px 3px 0px;
     border-left: 0px;
     background-color: #f6f6f6;
+    -webkit-appearance: none;
 }
 
 
