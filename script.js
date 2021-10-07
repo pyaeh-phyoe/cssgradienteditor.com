@@ -2232,8 +2232,7 @@ $(document).ready(function() {
     _createSizeSetting();
     _createPosSetting();
     _createAngSetting();
-    _deleteAllGradientsFromLocalStorage();
-    //_importAllGradientsFromLocalStorage();
+    _importAllGradientsFromLocalStorage();
     _resetPanel();
     _initSettings();
     _updateGradientCSS(["bg_image", "bg_size", "bg_position", "bg_repeat", "bg_color"]);
