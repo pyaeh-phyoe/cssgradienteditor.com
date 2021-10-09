@@ -2256,6 +2256,8 @@ function firstLoad() {
 }
 
 function _updateGradientCSS(properties) {
+    $("#get-css-dialog").dialog("close");
+
     var order = gradient.order,
         index = gradient.gradientIndex,
         l = order.length,
@@ -2578,6 +2580,7 @@ $(".add-gradient").hide();
 $(".adjust-color").hide();
 
 $("#add-gradient-cancel").click(function() {
+    $(".add-gradient__input").val("")
     $(".add-gradient").hide();
 });
 
@@ -3373,6 +3376,7 @@ $("#color-format").selectmenu({
         console.log(format);
         gradient.format = gradient.changeFormatColor(format);
         _updateGradientCSS(["bg_image"]);
+        $("#get-css-dialog").dialog("open");
     }
 });
 
