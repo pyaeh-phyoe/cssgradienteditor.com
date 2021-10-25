@@ -97,6 +97,7 @@ h6 {
 }
 
 h1 {
+    margin-bottom: 0px;
     text-align: center;
     font-size: 36px;
 }
@@ -1249,6 +1250,7 @@ footer ul {
     text-align: center;
     justify-content: center;
     padding: 0;
+    margin-bottom: 0;
 }
 
 .menu-bar ul li {
@@ -1266,3 +1268,14 @@ footer ul {
     padding: 12px 24px;
     text-decoration: none;
 }
+#custom-list-style {
+    list-style-type: none;
+}
+#custom-list-style li:before {
+ content: "";
+ display: inline-block;
+ margin-right: 10px;
+ height: 10px;
+ width: 10px;
+ background: linear-gradient(red, blue);
+} 
