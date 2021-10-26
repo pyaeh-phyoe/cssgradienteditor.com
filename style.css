@@ -1279,3 +1279,21 @@ footer ul {
  width: 10px;
  background: linear-gradient(red, blue);
 } 
+
+article h2 {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+article {
+    border-top: 1px solid #dddddd;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+article pre {
+    background-color: #F1F4F8;
+    padding: 10px 30px;
+    margin: 0;
+    border-radius: 5px;
+}

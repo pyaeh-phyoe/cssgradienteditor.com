@@ -58,11 +58,11 @@
                 <button id="do">do</button>
             </div>
             <ul>
-            <li style="border-top-color: #000; font-weight: bold;">
-                <a style="color: #0366d6;">CSS Gradient Editor</a>
-            </li>
-            <li><a href="https://csstextshadoweditor.com" target="_blank">CSS TextShadow Editor</a></li>
-        </ul>
+                <li style="border-top-color: #000; font-weight: bold;">
+                    <a style="color: #0366d6;">CSS Gradient Editor</a>
+                </li>
+                <li><a href="https://csstextshadoweditor.com" target="_blank">CSS TextShadow Editor</a></li>
+            </ul>
             <div class="l-pull-right">
                 <a id="report-bug-btn" class="btn-type-3" title="feedback" href="./contact" target="_blank">
                     Report Bug/Request Feature</a>
@@ -435,7 +435,9 @@
         <div style="overflow: hidden;
     width: 100%;
     padding: 0 15px;">
-    <!--<h2>About CSS Gradient Editor</h2>
+
+            <!--<article>
+        <h2>About CSS Gradient Editor</h2>
         <p>CSS Gradient Editor is the most advanced CSS gradient generator for creating CSS gradient backgrounds and patterns.</p>
 
         <h2>CSS Gradients</h2>
@@ -448,34 +450,40 @@
         <li>conic-gradient()</li>
         <li>repeating-conic-gradient()</li>
     </ul>
+    </article>-->
 
-    <h2>Creating a multi-colored border using CSS linear gradient</h2>
-    <h3>HTML</h3>
-    <code>&lt;div class='bordered'&gt;Border on all sides&lt;/div&gt;</code>
-    <h3>CSS</h3>
-    <pre><code>.bordered {
+            <article>
+                <h2>Creating a multi-colored border using CSS linear gradient</h2>
+                <h3>HTML</h3>
+                <pre><code>&lt;div class='bordered'&gt;Border on all sides&lt;/div&gt;</code></pre>
+                <h3>CSS</h3>
+                <pre><code>.bordered {
     border: 15px solid;
-    border-image-source: linear-gradient(to right, red 20%, green 20%, green 40%, blue 40%, blue 60%, maroon 60%, mar80%, chocolate 80%);
+    border-image-source: linear-gradient(to right, red 20%, green 20%, green 40%, blue 40%, blue 60%, maroon 60%, maroon 80%, chocolate 80%);
     border-image-slice: 1;
-}
-    </code></pre>
-    <p>The above example would produce a border that comprises 5 different colors. These colors are defined through a linear-gradient.</p>
-    <h3>Result</h3>
-    <div style="border: 15px solid;
+}</code></pre>
+                <p>The above example would produce a border that comprises 5 different colors. These colors are defined through a linear-gradient.</p>
+                <h3>Result</h3>
+                <div style="border: 15px solid;
     border-image-source: linear-gradient(to right, rgba(255,0,0,1) 20%, rgba(0,128,0,1) 20%, rgba(0,128,0,1) 40%, rgba(0,0,255,1) 40%, rgba(0,0,255,1) 60%, rgba(128,0,0,1) 60%, rgba(128,0,0,1) 80%, rgba(210,105,30,1) 80%);
     border-image-slice: 1;
     width: 300px;
     height: 200px;"></div>
+            </article>
 
-    <h2>Creating a custom list style with CSS gradient</h2>
-    <h3>HTML</h3>
-    <pre><code>&lt;ul&gt;
+            <article>
+                <h2>Creating a custom list style with CSS gradient</h2>
+                <h3>HTML</h3>
+                <pre><code>&lt;ul&gt;
     &lt;li&gt;Test I&lt;/li&gt;
     &lt;li&gt;Test II&lt;/li&gt;
     &lt;li&gt;Test III&lt;/li&gt;
 &lt;/ul&gt;</code></pre>
-    <h3>CSS</h3>
-    <pre><code>
+                <h3>CSS</h3>
+                <pre><code>ul {
+    list-style-type: none;
+}
+
 li:before {
     content: "";
     display: inline-block;
@@ -484,16 +492,16 @@ li:before {
     width: 10px;
     background: linear-gradient(red, blue);
 }</code></pre>
+                <p>First remove the default list style. Then add gradient boxes for bullets.</p>
 
-<h3>Result</h3>
-<ul id="custom-list-style">
- <li>Test I</li>
- <li>Test II</li>
- <li>Test III</li>
-</ul>
-
-
-    </div>-->
+                <h3>Result</h3>
+                <ul id="custom-list-style">
+                    <li>Test I</li>
+                    <li>Test II</li>
+                    <li>Test III</li>
+                </ul>
+            </article>
+        </div>
 
 
         <footer>
