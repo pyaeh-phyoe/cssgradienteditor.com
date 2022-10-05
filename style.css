@@ -1296,5 +1296,5 @@ article pre {
     padding: 10px 30px;
     margin: 0;
     border-radius: 5px;
-    white-space: pre-warp;
+    white-space: pre-wrap;
 }
